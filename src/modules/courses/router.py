@@ -4,7 +4,7 @@ from fastapi import APIRouter, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.core.database import get_db_session
-from src.modules.courses.schemas import CourseResponse, CourseCreate
+from src.modules.courses.schemas import CourseResponse, CourseCreate, CourseUpdate
 from src.modules.courses.service import CourseService
 
 router = APIRouter()
@@ -16,8 +16,15 @@ async def create_course(
 ):
     return await CourseService.create_course(db, course_in)
 
+@router.patch("/", response_model=CourseResponse, status_code=status.HTTP_200_OK)
+async def update_course(
+    course_id: uuid.UUID,
+    course_in: CourseUpdate,
+    db: AsyncSession = Depends(get_db_session)
+):
+    return await CourseService.update_course(db, course_id, course_in)
+
 @router.get("/{course_id}", response_model=CourseResponse)
-# @router.get("/{course_id}")
 async def get_course(
     course_id: uuid.UUID,
     db: AsyncSession = Depends(get_db_session)
