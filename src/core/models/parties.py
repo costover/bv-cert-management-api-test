@@ -1,8 +1,7 @@
 import uuid
-from datetime import datetime, timezone
 from typing import Optional, List
 
-from sqlalchemy import String, DateTime, Integer
+from sqlalchemy import String, ForeignKey
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
 from src.core.database import Base
@@ -11,11 +10,9 @@ from src.core.database import Base
 class Party(Base):
     __tablename__ = "party"
 
-    __table_args__ = {"schema": "cert_db"}
-
     party_id: Mapped[uuid.UUID] = mapped_column(primary_key=True, index=True, default=uuid.uuid4)
-    party_type_id: Mapped[str] = mapped_column(String(20))
-    status_id: Mapped[str] = mapped_column(String(20))
+    party_type_id: Mapped[str] = mapped_column(ForeignKey("party_type.party_type_id"))
+    status_id: Mapped[str] = mapped_column(ForeignKey("status_item.status_id"))
     first_name: Mapped[Optional[str]] = mapped_column(String(100))
     middle_name: Mapped[Optional[str]] = mapped_column(String(100))
     last_name: Mapped[Optional[str]] = mapped_column(String(255))
@@ -29,8 +26,6 @@ class Party(Base):
 
 class PartyType(Base):
     __tablename__ = "party_type"
-
-    __table_args__ = {"schema": "cert_db"}
 
     party_type_id: Mapped[str] = mapped_column(String(20), primary_key=True, index=True)
     description: Mapped[Optional[str]] = mapped_column(String(255))

@@ -4,7 +4,7 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.modules.parties.models import Party
+from src.core.models import Party
 from src.modules.parties.schemas import PartyCreate, PartyUpdate
 
 

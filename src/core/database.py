@@ -1,4 +1,6 @@
 from collections.abc import AsyncGenerator
+
+from sqlalchemy import MetaData
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 from src.core.config import settings  # Your global Pydantic Settings instance
@@ -23,7 +25,7 @@ async_session_factory = async_sessionmaker(
 
 # 3. Create the Declarative Base class that models inherit from
 class Base(DeclarativeBase):
-    pass
+    metadata = MetaData(schema="cert_db")
 
 # 4. The FastAPI Dependency function used in endpoint routers
 async def get_db_session() -> AsyncGenerator[AsyncSession, None]:

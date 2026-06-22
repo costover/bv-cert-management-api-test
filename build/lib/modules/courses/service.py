@@ -1,12 +1,10 @@
 import uuid
-from datetime import datetime
-from zoneinfo import ZoneInfo
 
 from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.modules.courses.models import Course
+from src.core.models.courses import Course
 from src.modules.courses.schemas import CourseCreate, CourseUpdate
 
 
