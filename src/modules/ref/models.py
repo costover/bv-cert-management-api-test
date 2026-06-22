@@ -5,7 +5,6 @@ from sqlalchemy import String, DateTime
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
 from src.core.database import Base
-from src.modules.courses.models import Course
 
 
 class StatusItem(Base):
@@ -19,6 +18,7 @@ class StatusItem(Base):
     last_updated_stamp: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
 
     courses: Mapped[List["Course"]] = relationship(back_populates="status")
+    parties: Mapped[List["Party"]] = relationship(back_populates="status")
 
 
 class Enumeration(Base):

@@ -19,7 +19,6 @@ class CourseService:
         existing_course = await db.scalar(select(Course).where(Course.course_name == course_in.course_name))
         if existing_course:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Course with this name already exists")
-        # course_in.deadline_date = course_in.deadline_date.replace(tzinfo=ZoneInfo("UTC"))
         db_course = Course(**course_in.model_dump())
         db.add(db_course)
         await db.commit()
@@ -59,7 +58,7 @@ class CourseService:
         db: AsyncSession,
         course_id: uuid.UUID
     ) -> Course:
-        course = await db.get(Course, course_id)
+        course = await db.scalar(select(Course).where(Course.course_id == course_id))
         if not course:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Course not found")
         return course

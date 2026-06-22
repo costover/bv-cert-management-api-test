@@ -6,7 +6,6 @@ from sqlalchemy import String, DateTime, Integer
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
 from src.core.database import Base
-from src.modules.ref.models import StatusItem, Enumeration
 
 
 class Course(Base):

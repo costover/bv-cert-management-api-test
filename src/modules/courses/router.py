@@ -24,7 +24,7 @@ async def update_course(
 ):
     return await CourseService.update_course(db, course_id, course_in)
 
-@router.get("/{course_id}", response_model=CourseResponse)
+@router.get("/{course_id}", response_model=CourseResponse, status_code=status.HTTP_200_OK)
 async def get_course(
     course_id: uuid.UUID,
     db: AsyncSession = Depends(get_db_session)
