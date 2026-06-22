@@ -3,10 +3,9 @@ from datetime import datetime, timezone
 from typing import Optional
 
 from sqlalchemy import String, DateTime, Integer
-from sqlalchemy.orm import mapped_column, Mapped, relationship
+from sqlalchemy.orm import mapped_column, Mapped
 
 from src.core.database import Base
-from src.modules.ref.models import StatusItem, Enumeration
 
 
 class Course(Base):
@@ -19,11 +18,8 @@ class Course(Base):
     description: Mapped[Optional[str]] = mapped_column(String(255))
     status_id: Mapped[str] = mapped_column(String(20))
     created_date: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.now(timezone.utc))
-    deadline_type_enum_id: Mapped[Optional[str]] = mapped_column(String(20))
+    deadline_type_id: Mapped[Optional[str]] = mapped_column(String(20))
     deadline_date: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
     deadline_relative: Mapped[Optional[int]] = mapped_column(Integer)
     deadline_relative_uom_id: Mapped[Optional[str]] = mapped_column(String(20))
     eleap_course_id: Mapped[Optional[str]] = mapped_column(String(255))
-
-    status: Mapped["StatusItem"] = relationship(back_populates="courses")
-    deadline_type: Mapped["Enumeration"] = relationship(back_populates="courses")
