@@ -16,7 +16,6 @@ class Settings(BaseSettings):
     PORT: int = 8000
     BACKEND_CORS_ORIGINS: list[AnyHttpUrl] = []
 
-    SECRET_KEY: str
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
@@ -25,7 +24,6 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_PORT: int = 5432
     DB_NAME: str
-    DB_SCHEMA: str
     DB_ECHO: bool = False
 
     @computed_field

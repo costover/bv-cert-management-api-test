@@ -18,7 +18,7 @@ class Course(Base):
     description: Mapped[Optional[str]] = mapped_column(String(255))
     status_id: Mapped[str] = mapped_column(String(20))
     created_date: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.now(timezone.utc))
-    deadline_type_id: Mapped[str] = mapped_column(String(20))
+    deadline_type_id: Mapped[Optional[str]] = mapped_column(String(20))
     deadline_date: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
     deadline_relative: Mapped[Optional[int]] = mapped_column(Integer)
     deadline_relative_uom_id: Mapped[Optional[str]] = mapped_column(String(20))
