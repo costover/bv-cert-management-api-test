@@ -1,7 +1,6 @@
 import uuid
 from datetime import datetime, timezone
-from sqlite3 import Date
-from typing import Optional
+from typing import Optional, List
 
 from sqlalchemy import String, DateTime, Integer, ForeignKey
 from sqlalchemy.orm import mapped_column, Mapped, relationship
