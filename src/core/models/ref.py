@@ -17,6 +17,7 @@ class StatusItem(Base):
 
     courses: Mapped[List["Course"]] = relationship(back_populates="status")
     parties: Mapped[List["Party"]] = relationship(back_populates="status")
+    course_members: Mapped[List["CourseMember"]] = relationship(back_populates="status")
 
 
 class Enumeration(Base):

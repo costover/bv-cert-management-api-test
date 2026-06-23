@@ -1,4 +1,5 @@
 import uuid
+from typing import List
 
 from fastapi import HTTPException, status
 from sqlalchemy import select
@@ -22,7 +23,6 @@ class CourseService:
         await db.commit()
         await db.refresh(db_course)
         return db_course
-
 
     @staticmethod
     async def update_course(
@@ -50,7 +50,6 @@ class CourseService:
 
         return db_course
 
-
     @staticmethod
     async def get_course(
         db: AsyncSession,
@@ -60,3 +59,8 @@ class CourseService:
         if not course:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Course not found")
         return course
+
+    @staticmethod
+    async def get_all_courses(db: AsyncSession) -> List[Course]:
+        result = await db.execute(select(Course))
+        return list(result.scalars().all())
