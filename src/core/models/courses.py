@@ -24,6 +24,7 @@ class Course(Base):
     status: Mapped["StatusItem"] = relationship(back_populates="courses")
     deadline_type: Mapped["Enumeration"] = relationship(back_populates="courses")
     members: Mapped[List["CourseMember"]] = relationship(back_populates="course")
+    credentials: Mapped[List["PartyCredential"]] = relationship(back_populates="course")
 
 
 class CourseMember(Base):

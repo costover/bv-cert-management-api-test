@@ -23,6 +23,7 @@ class Party(Base):
     status: Mapped["StatusItem"] = relationship(back_populates="parties")
     party_type: Mapped["PartyType"] = relationship(back_populates="parties")
     courses: Mapped[List["CourseMember"]] = relationship(back_populates="party")
+    credentials: Mapped[List["PartyCredential"]] = relationship(back_populates="party")
 
 
 class PartyType(Base):

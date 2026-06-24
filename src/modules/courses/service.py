@@ -104,8 +104,8 @@ class CourseService:
 
     @staticmethod
     async def get_course_member(
-            db: AsyncSession,
-            course_member_id: uuid.UUID
+        db: AsyncSession,
+        course_member_id: uuid.UUID
     ) -> CourseMember:
 
         result = await CourseService._get_course_members_filtered(
