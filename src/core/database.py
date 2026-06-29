@@ -26,18 +26,3 @@ async_session_factory = async_sessionmaker(
 # 3. Create the Declarative Base class that models inherit from
 class Base(DeclarativeBase):
     metadata = MetaData(schema="cert_db")
-
-# 4. The FastAPI Dependency function used in endpoint routers
-async def get_db_session() -> AsyncGenerator[AsyncSession, None]:
-    """
-    Yields a database session instance per HTTP request.
-    Automatically closes or rolls back the transaction when done.
-    """
-    async with async_session_factory() as session:
-        try:
-            yield session
-        except Exception:
-            await session.rollback()
-            raise
-        finally:
-            await session.close()
