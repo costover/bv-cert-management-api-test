@@ -2,8 +2,13 @@ import uuid
 
 from pydantic import BaseModel
 
+from src.core.schema import ApiModel
 
-class PartyCreate(BaseModel):
+
+class PartyRequest(ApiModel):
+    party_id: uuid.UUID
+
+class PartyCreate(ApiModel):
     party_type_id: str
     status_id: str
     first_name: str | None
@@ -14,7 +19,7 @@ class PartyCreate(BaseModel):
     eleap_user_id: str | None
 
 
-class PartyUpdate(BaseModel):
+class PartyUpdate(ApiModel):
     party_type_id: str
     status_id: str
     first_name: str | None
@@ -25,7 +30,7 @@ class PartyUpdate(BaseModel):
     eleap_user_id: str | None
 
 
-class PartyResponse(BaseModel):
+class PartyResponse(ApiModel):
     party_id: uuid.UUID
     party_type_id: str
     status_id: str

@@ -1,10 +1,10 @@
 import uuid
 
-from fastapi import APIRouter, status, Depends
+from fastapi import APIRouter, status, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.core.dependencies import get_current_user, get_db_session
-from src.modules.parties.schemas import PartyResponse, PartyCreate, PartyUpdate
+from src.modules.parties.schemas import PartyResponse, PartyCreate, PartyUpdate, PartyRequest
 from src.modules.parties.service import PartyService
 
 router = APIRouter()
@@ -30,7 +30,7 @@ async def update_party(
 
 @router.get("/", response_model=PartyResponse, status_code=status.HTTP_200_OK)
 async def get_party(
-    party_id: uuid.UUID,
+    party_id: uuid.UUID = Query(alias="partyId"),
     db: AsyncSession = Depends(get_db_session),
     current_user: str = Depends(get_current_user)
 ):

@@ -3,8 +3,10 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
+from src.core.schema import ApiModel
 
-class CourseResponse(BaseModel):
+
+class CourseResponse(ApiModel):
     course_id: uuid.UUID
     course_name: str
     description: str | None
@@ -17,7 +19,7 @@ class CourseResponse(BaseModel):
     eleap_course_id: str | None
 
 
-class CourseCreate(BaseModel):
+class CourseCreate(ApiModel):
     course_name: str = Field(
         max_length=255
     )
@@ -45,7 +47,7 @@ class CourseCreate(BaseModel):
     )
 
 
-class CourseUpdate(BaseModel):
+class CourseUpdate(ApiModel):
     course_name: str = Field(
         max_length=255
     )
@@ -73,7 +75,7 @@ class CourseUpdate(BaseModel):
     )
 
 
-class CourseMemberResponse(BaseModel):
+class CourseMemberResponse(ApiModel):
     course_member_id: uuid.UUID
     course_id: uuid.UUID
     party_id: uuid.UUID
@@ -82,7 +84,7 @@ class CourseMemberResponse(BaseModel):
     completion_date: datetime | None
 
 
-class CourseMemberCreate(BaseModel):
+class CourseMemberCreate(ApiModel):
     course_id: uuid.UUID
     party_id: uuid.UUID
     status_id: str | None = Field(
@@ -92,7 +94,7 @@ class CourseMemberCreate(BaseModel):
     completion_date: datetime | None
 
 
-class CourseMemberUpdate(BaseModel):
+class CourseMemberUpdate(ApiModel):
     course_id: uuid.UUID
     party_id: uuid.UUID
     status_id: str | None = Field(

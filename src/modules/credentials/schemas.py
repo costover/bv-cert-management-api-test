@@ -3,8 +3,10 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
+from src.core.schema import ApiModel
 
-class PartyCredentialResponse(BaseModel):
+
+class PartyCredentialResponse(ApiModel):
     credential_id: uuid.UUID
     party_id: uuid.UUID
     course_id: uuid.UUID
@@ -12,14 +14,14 @@ class PartyCredentialResponse(BaseModel):
     thru_date: datetime | None
 
 
-class PartyCredentialCreate(BaseModel):
+class PartyCredentialCreate(ApiModel):
     party_id: uuid.UUID
     course_id: uuid.UUID
     from_date: datetime | None
     thru_date: datetime | None
 
 
-class PartyCredentialUpdate(BaseModel):
+class PartyCredentialUpdate(ApiModel):
     party_id: uuid.UUID
     course_id: uuid.UUID
     from_date: datetime | None
